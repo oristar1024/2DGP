@@ -55,10 +55,23 @@ def make_rectangle():
     #move_up()
     #move_left()
     #move_down()
-    move_from_left_to_center()
+    #move_from_left_to_center()
+    pass
+
+import math
 
 def make_circle():
-    pass
+    cx, cy, r = 800 // 2, 600 // 2, (600 - 180) // 2
+    x, y = 800 // 2, 90
+    degree = -90
+    while degree < 270:
+        clear_canvas()
+        grass.draw_now(400, 30)
+        character.draw_now(x, y)
+        x = cx + r * math.cos(math.radians(degree))
+        y = cy + r * math.sin(math.radians(degree))
+        degree = degree + 1
+        delay(0.01)
 
 while True:
     make_rectangle()
