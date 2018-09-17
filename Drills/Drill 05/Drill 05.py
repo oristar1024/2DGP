@@ -16,6 +16,10 @@ def move_to_point(px, py):
     xmove = (px - x) / 40
     ymove = (py - y) / 40
     for i in range (1, 40+1):
+        if xmove < 0:
+            motion = 0
+        else:
+            motion = 100
         clear_canvas()
         character.clip_draw(frame * 100, motion, 100, 100, x, y)
         update_canvas()
@@ -26,5 +30,6 @@ def move_to_point(px, py):
 
 while 1:
     move_to_point(300, 300)
+    move_to_point(100, 100)
 close_canvas()
 
