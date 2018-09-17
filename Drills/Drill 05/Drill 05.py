@@ -13,14 +13,15 @@ y = 30
 
 def move_to_point(px, py):
     global x, y, frame, motion
-    xmove = (px - x) / 40
+    xmove = (px - x) / 40 # 현재점에서 다음점까지의 증가값을 40개로 나눴다.
     ymove = (py - y) / 40
     for i in range (1, 40+1):
-        if xmove < 0:
+        if xmove < 0: # 왼쪽으로 이동해야할때
             motion = 0
         else:
             motion = 100
         clear_canvas()
+        grass.draw_now(400, 30)
         character.clip_draw(frame * 100, motion, 100, 100, x, y)
         update_canvas()
         x += xmove
@@ -29,7 +30,7 @@ def move_to_point(px, py):
         delay(0.05)
 
 while 1:
-    move_to_point(300, 300)
-    move_to_point(100, 100)
+    for px, py in points:
+        move_to_point(px, py)
 close_canvas()
 
