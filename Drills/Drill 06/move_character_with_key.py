@@ -42,7 +42,10 @@ while running:
     update_canvas()
 
     handle_events()
-    frame = (frame + 1) % 8
+    if dir != 0:
+         frame = (frame + 1) % 8
+    else:
+        frame = 0
     x += dir * 5
 
     delay(0.05)
