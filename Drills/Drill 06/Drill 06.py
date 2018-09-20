@@ -4,7 +4,8 @@ KPU_WIDTH, KPU_HEIGHT = 1280, 1024
 
 def move_to_point(px, py):
     global cx, cy, frame, motion
-    global move = True;
+    global move
+    move = True
     xmove = (px - cx) / 40  # 현재점에서 다음점까지의 증가값을 40개로 나눴다.
     ymove = (py - cy) / 40
     for i in range(1, 40 + 1):  # 40번에걸쳐 다음점으로 이동
@@ -14,12 +15,16 @@ def move_to_point(px, py):
             else:
                 motion = 100
             clear_canvas()
+            kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+            mouse.clip_draw(0, 0, 100, 100, mx, my)
             character.clip_draw(frame * 100, motion, 100, 100, cx, cy)
             update_canvas()
             cx += xmove
             cy += ymove
             frame = (frame + 1) % 8
+            handle_events()
             delay(0.05)
+    move = False
 
 
 def handle_events():
@@ -31,11 +36,12 @@ def handle_events():
         if event.type == SDL_QUIT:
             running = False
         elif event.type == SDL_MOUSEMOTION:
-            mx, my = event.x + 50, KPU_HEIGHT - 1 - event.y - 50
+            mx, my = event.x , KPU_HEIGHT - 1 - event.y
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
         elif event.type == SDL_MOUSEBUTTONDOWN:
-            pass
+            move_to_point(mx-50, my+50)
+
 
 
 
@@ -53,14 +59,15 @@ move = False
 hide_cursor()
 
 while running:
-    clear_canvas()
-    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
-    mouse.clip_draw(0, 0, 100, 100, mx, my)
-    update_canvas()
-    frame = (frame + 1) % 8
-
-    delay(0.02)
-    handle_events()
+    if move == False:
+        clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        character.clip_draw(frame * 100, motion, 100, 100, cx, cy)
+        mouse.clip_draw(0, 0, 100, 100, mx, my)
+        update_canvas()
+        frame = (frame + 1) % 8
+        delay(0.05)
+        handle_events()
 
 close_canvas()
 
