@@ -19,7 +19,7 @@ def move_to_point(p1, p2):
         x = (1 - t) * p1[0] + t * p2[0]
         y = (1 - t) * p1[1] + t * p2[1]
         clear_canvas()
-        if p1[0] > p2[0]:
+        if p1[0] > p2[0]: # 왼쪽을 바라볼때
             motion = 0
         else:
             motion = 100
