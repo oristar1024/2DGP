@@ -1,28 +1,40 @@
 from pico2d import *
+import random
 
-open_canvas()
-grass = load_image('grass.png')
+KPU_WIDTH, KPU_HEIGHT = 1280, 1024
+
+open_canvas(KPU_WIDTH, KPU_HEIGHT)
+kpu_ground = load_image('KPU_GROUND.png')
 character = load_image('animation_sheet.png')
-
-points = [203, 535], [132, 243], [535, 470], [477, 203], [715, 136], [316, 225], [510, 92], [692, 518], [682, 336], [712, 349]
 
 frame = 0
 motion = 100 # 캐릭터의 이동방향을 표현하는 스프라이트 시트의 y값
 x = 25
 y = 50
 
-def move_to_point(px, py):
+def move_to_point(p1, p2):
     global x, y, frame, motion
+    for i in range(0, 100 + 1, 2):
+        t = i / 100
+        x = (1 - t) * p1[0] + t * p2[0]
+        y = (1 - t) * p1[1] + t * p2[1]
         clear_canvas()
-        grass.draw_now(400, 30)
+        if p1[0] > p2[0]:
+            motion = 0
+        else:
+            motion = 100
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
         character.clip_draw(frame * 100, motion, 100, 100, x, y)
         update_canvas()
         frame = (frame + 1) % 8
         delay(0.05)
 
+i=0
+points = [(random.randint(0 + 50, KPU_WIDTH - 50), random.randint(0 + 50, KPU_HEIGHT - 50)) for i in range(20)]
+
 while 1:
-    for px, py in points:
-        move_to_point()
+    move_to_point(points[i-1], points[i])
+    i = (i + 1) % 20
         
 close_canvas()
 
