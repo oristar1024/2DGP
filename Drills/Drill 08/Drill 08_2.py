@@ -35,8 +35,8 @@ points = [(random.randint(0 + 50, KPU_WIDTH - 50), random.randint(0 + 50, KPU_HE
 i = 0
 
 while 1:
-    #draw_curve_4_points()
-    pass
+    draw_curve_4_points(points[i - 3], points[i - 2], points[i - 1], points[i])
+    i = (i + 1) % 10
 
         
 close_canvas()
