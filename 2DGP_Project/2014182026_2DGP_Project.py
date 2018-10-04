@@ -10,6 +10,7 @@ map_number = 1
 # 맵타일은 한칸에 X, Y 각 65
 def handle_events():
     global running
+    global character_head, character_body
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -17,6 +18,15 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_w:
                 character_head = 4
+                character_body = 0
+            elif event.key == SDLK_a:
+                character_head = 6
+                character_body = 1
+            elif event.key == SDLK_d:
+                character_head = 2
+                character_body = 1
+            elif event.key == SDLK_s:
+                character_head = 0
                 character_body = 0
             elif event.key == SDLK_ESCAPE:
                 running = False
@@ -37,7 +47,7 @@ def draw_map():
     y = 25
     while y < MAP_HEGIHT:
         while x < MAP_WIDTH:
-            map.clip_draw((map_number - 1) * 65 + 2 + 5, 65 + 5, 50, 50, x, y)
+            map.clip_draw((map_number - 1) * 65 + 2 + 5, 65 + 5, 50, 50, x, y) # X값 + 2 는 파란선 부분제거용, X, Y 의+5는 테두리 자르기
             x += 50
         x = 25
         y += 50
@@ -56,13 +66,13 @@ while running:
     character_body_frame = (character_body_frame+1) % 10
     if idling_timer == 10:
         character_idling = True
-        character_head_frame = 1
+        character_head_frame += 1
     if character_head_frame == 1 and idling_timer == 13: # 캐릭터가 눈을 감은지 3프레임이 지나면 눈을뜬다.
-        character_head_frame = 0
+        character_head_frame -= 1
         character_idling = False
     clear_canvas()
     draw_map()
-    character.clip_draw(8 + 32*character_body_frame, 850 - 50*character_body, 32, 30, 100, 100 - 15)
+    character.clip_draw(8 + 32*character_body_frame, 850 - 42*character_body, 32, 30, 100, 100 - 15)
     character.clip_draw(4 + 40*character_head + 40*character_head_frame, 900, 40, 30, 100, 100)
     update_canvas()
     delay(0.05)
