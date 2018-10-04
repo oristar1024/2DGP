@@ -1,37 +1,30 @@
 from pico2d import *
+import random
 
-open_canvas()
-grass = load_image('grass.png')
+KPU_WIDTH, KPU_HEIGHT = 1280, 1024
+
+open_canvas(KPU_WIDTH, KPU_HEIGHT)
 character = load_image('animation_sheet.png')
-
-points = [203, 535], [132, 243], [535, 470], [477, 203], [715, 136], [316, 225], [510, 92], [692, 518], [682, 336], [712, 349]
+kpu_ground = load_image('KPU_GROUND.png')
 
 frame = 0
 motion = 100 # 캐릭터의 이동방향을 표현하는 스프라이트 시트의 y값
 x = 25
 y = 50
 
-def move_to_point(px, py):
-    global x, y, frame, motion
-    xmove = (px - x) / 40 # 현재점에서 다음점까지의 증가값을 40개로 나눴다.
-    ymove = (py - y) / 40
-    for i in range (1, 40+1): # 40번에걸쳐 다음점으로 이동
-        if xmove < 0: # 왼쪽으로 이동해야할때
-            motion = 0
-        else:
-            motion = 100
-        clear_canvas()
-        grass.draw_now(400, 30)
-        character.clip_draw(frame * 100, motion, 100, 100, x, y)
-        update_canvas()
-        x += xmove
-        y += ymove
-        frame = (frame + 1) % 8
-        delay(0.05)
+def draw_curve_4_points(p1, p2, p3, p4):
+    global frame, x, y, motion
+    # draw p2-p3
+    for i in range(0, 100, 2):
+        t = i / 100
+        x = ((-t**3 + 2*t**2 - t)*p1[0] + (3*t**3 - 5*t**2 + 2)*p2[0] + (-3*t**3 + 4*t**2 + t)*p3[0] + (t**3 - t**2)*p4[0])/2
+        y = ((-t**3 + 2*t**2 - t)*p1[1] + (3*t**3 - 5*t**2 + 2)*p2[1] + (-3*t**3 + 4*t**2 + t)*p3[1] + (t**3 - t**2)*p4[1])/2
+
 
 while 1:
-    for px, py in points:
-        move_to_point(px, py)
+    #draw_curve_4_points()
+    pass
+
         
 close_canvas()
 
