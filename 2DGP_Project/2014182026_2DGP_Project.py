@@ -33,13 +33,14 @@ map = load_image("Tiles.png")
 
 def draw_map():
     global map_number
-    x = 0
-    y = 0
+    x = 25
+    y = 25
     while y < MAP_HEGIHT:
         while x < MAP_WIDTH:
-            map.clip_draw((map_number - 1) * 50, 0, 50, 50, x, y)
-            x += 50
-        y += 50
+            map.clip_draw((map_number - 1) * 50, 65, 65, 65, x, y)
+            x += 55
+        x = 25
+        y += 55
 
 
 if weapon == 1:
