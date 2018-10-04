@@ -11,32 +11,51 @@ map_number = 1
 def handle_events():
     global running
     global character_head, character_body
+    global x_dir, y_dir
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
             running = False
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_w:
-                character_head = 4
-                character_body = 0
+                y_dir += 1
+
             elif event.key == SDLK_a:
-                character_head = 6
-                character_body = 1
+                x_dir -= 1
+
             elif event.key == SDLK_d:
-                character_head = 2
-                character_body = 1
+                x_dir += 1
+
             elif event.key == SDLK_s:
-                character_head = 0
-                character_body = 0
+                y_dir -= 1
+
             elif event.key == SDLK_ESCAPE:
                 running = False
 
-idling_timer = 0 #idling을 할 순간을 결정하는 타이머
+        elif event.type == SDL_KEYUP:
+            if event.key == SDLK_w:
+                y_dir -= 1
+
+            elif event.key == SDLK_a:
+                x_dir += 1
+
+            elif event.key == SDLK_d:
+                x_dir -= 1
+
+            elif event.key == SDLK_s:
+                y_dir += 1
+
+
+idling_timer = 0 # idling을 할 순간을 결정하는 타이머
+x_dir = 0 # 캐릭터의 x방향
+y_dir = 0 # 캐릭터의 y방향
 character_idling = False
 character_head = 0
 character_head_frame = 0
 character_body_frame = 0
 character_body = 0
+character_x = 50
+character_y = 50
 open_canvas()
 
 map = load_image("Tiles.png")
@@ -63,17 +82,42 @@ elif weapon == 3:
 
 while running:
     idling_timer = (idling_timer+1) % 20
-    character_body_frame = (character_body_frame+1) % 10
+
+    if x_dir != 0 or y_dir != 0:
+        character_body_frame = (character_body_frame+1) % 10
+    else:
+        character_head = 0
+        character_body = 0
+        character_body_frame = 0
+
+    if y_dir == 1:
+        character_head = 4
+        character_body = 0
+    elif y_dir == -1:
+        character_head = 0
+        character_body = 0
+    elif x_dir == 1:
+        character_head = 2
+        character_body = 1
+    elif x_dir == -1:
+        character_head = 6
+        character_body = 1
+
+    character_x += x_dir*10
+    character_y += y_dir*10
     if idling_timer == 10:
         character_idling = True
         character_head_frame += 1
+
     if character_head_frame == 1 and idling_timer == 13: # 캐릭터가 눈을 감은지 3프레임이 지나면 눈을뜬다.
         character_head_frame -= 1
         character_idling = False
+
+
     clear_canvas()
     draw_map()
-    character.clip_draw(8 + 32*character_body_frame, 850 - 42*character_body, 32, 30, 100, 100 - 15)
-    character.clip_draw(4 + 40*character_head + 40*character_head_frame, 900, 40, 30, 100, 100)
+    character.clip_draw(8 + 32*character_body_frame, 850 - 42*character_body, 32, 30, character_x, character_y - 15)
+    character.clip_draw(4 + 40*character_head + 40*character_head_frame, 900, 40, 30, character_x, character_y)
     update_canvas()
     delay(0.05)
     handle_events()
