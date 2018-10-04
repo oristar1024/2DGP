@@ -30,7 +30,10 @@ def draw_curve_4_points(p1, p2, p3, p4):
         update_canvas()
         frame = (frame + 1) % 8
         delay(0.05)
-        
+
+points = [(random.randint(0 + 50, KPU_WIDTH - 50), random.randint(0 + 50, KPU_HEIGHT- 50)) for i in range(10)]
+i = 0
+
 while 1:
     #draw_curve_4_points()
     pass
