@@ -41,3 +41,4 @@ while 1:
         
 close_canvas()
 
+# 완성!
