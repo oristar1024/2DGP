@@ -2,7 +2,7 @@ from pico2d import *
 import random
 weapon = 1
 running = True
-# 캐릭터 스프라이트의 머리는 5, 900 부터 X 40, Y 30 (글자위치 10)
+# 캐릭터 스프라이트의 머리는 4, 900 부터 X 40, Y 30 (글자위치 10)
 # 몸통은 8, 850부터 X32, Y30, 머리로부터 Y를 15만큼 빼준다.
 
 def handle_events():
@@ -15,6 +15,8 @@ def handle_events():
             if event.key == SDLK_ESCAPE:
                 running = False
 
+character_head = 0
+character_body = 0
 open_canvas()
 if weapon == 1:
     character = load_image('Gunner.png')
@@ -23,7 +25,10 @@ elif weapon == 2:
 elif weapon == 3:
     character = load_image('cannoneer.png')
 while running:
-    character.clip_draw(8 + 32*7, 850, 32, 30, 100, 100 - 15)
-    character.clip_draw(5, 900, 40, 30, 100, 100)
+    character_body = (character_body+1) % 10
+    clear_canvas()
+    character.clip_draw(8 + 32*character_body, 850, 32, 30, 100, 100 - 15)
+    character.clip_draw(4 + 40*character_head, 900, 40, 30, 100, 100)
     update_canvas()
+    delay(0.05)
     handle_events()
