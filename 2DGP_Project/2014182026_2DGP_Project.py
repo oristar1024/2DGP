@@ -7,7 +7,7 @@ MAP_HEGIHT = 3000
 map_number = 1
 # 캐릭터 스프라이트의 머리는 4, 900 부터 X 40, Y 30 (글자위치 10)
 # 몸통은 8, 850부터 X32, Y30, 머리로부터 Y를 15만큼 빼준다.
-
+# 맵타일은 한칸에 X, Y 각 65
 def handle_events():
     global running
     events = get_events()
@@ -37,10 +37,10 @@ def draw_map():
     y = 25
     while y < MAP_HEGIHT:
         while x < MAP_WIDTH:
-            map.clip_draw((map_number - 1) * 50, 65, 65, 65, x, y)
-            x += 55
+            map.clip_draw((map_number - 1) * 65 + 2 + 5, 65 + 5, 50, 50, x, y)
+            x += 50
         x = 25
-        y += 55
+        y += 50
 
 
 if weapon == 1:
