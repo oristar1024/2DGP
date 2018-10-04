@@ -23,7 +23,7 @@ def draw_curve_4_points(p1, p2, p3, p4):
         clear_canvas()
         if x < tx:
             motion = 0
-        elif x < tx:
+        elif x > tx:
             motion = 100
         kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
         character.clip_draw(frame * 100, motion, 100, 100, x, y)
