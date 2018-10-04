@@ -13,14 +13,24 @@ x = 25
 y = 50
 
 def draw_curve_4_points(p1, p2, p3, p4):
-    global frame, x, y, motion
+    global frame, tx, x, y, motion
     # draw p2-p3
     for i in range(0, 100, 2):
+        tx = x
         t = i / 100
         x = ((-t**3 + 2*t**2 - t)*p1[0] + (3*t**3 - 5*t**2 + 2)*p2[0] + (-3*t**3 + 4*t**2 + t)*p3[0] + (t**3 - t**2)*p4[0])/2
         y = ((-t**3 + 2*t**2 - t)*p1[1] + (3*t**3 - 5*t**2 + 2)*p2[1] + (-3*t**3 + 4*t**2 + t)*p3[1] + (t**3 - t**2)*p4[1])/2
-
-
+        clear_canvas()
+        if x < tx:
+            motion = 0
+        elif x < tx:
+            motion = 100
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        character.clip_draw(frame * 100, motion, 100, 100, x, y)
+        update_canvas()
+        frame = (frame + 1) % 8
+        delay(0.05)
+        
 while 1:
     #draw_curve_4_points()
     pass
