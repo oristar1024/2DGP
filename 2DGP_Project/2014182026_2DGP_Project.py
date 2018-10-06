@@ -105,19 +105,23 @@ while running:
     if left_move:
         character_head = 6
         character_body = 1
-        x_dir -= 2
+        if x_dir > -15:
+            x_dir -= 2
     if right_move:
         character_head = 2
         character_body = 1
-        x_dir += 2
+        if x_dir < 15:
+            x_dir += 2
     if up_move:
         character_head = 4
         character_body = 0
-        y_dir += 2
+        if y_dir < 15:
+            y_dir += 2
     if down_move:
         character_head = 0
         character_body = 0
-        y_dir -= 2
+        if y_dir > -15:
+            y_dir -= 2
     if left_move and right_move:
         character_head = 0
         character_body = 0
