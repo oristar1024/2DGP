@@ -62,8 +62,8 @@ character_body_frame = 0
 character_body = 0
 character_x = 50
 character_y = 50
-mouse_x = 0
-mouse_y = 0
+mouse_x = 50
+mouse_y = 50
 
 open_canvas(1024, 768)
 hide_cursor()
