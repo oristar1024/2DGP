@@ -146,9 +146,9 @@ while running:
 
     clear_canvas()
     draw_map()
-    mouse.clip_draw(0, 0, 50, 50, mouse_x, mouse_y)
     character.clip_draw(8 + 32*character_body_frame, 850 - 42*character_body, 32, 30, character_x, character_y - 15)
     character.clip_draw(4 + 40*character_head + 40*character_head_frame, 900, 40, 30, character_x, character_y)
+    mouse.clip_draw(0, 0, 50, 50, mouse_x, mouse_y)
     update_canvas()
     delay(0.01)
     handle_events()
