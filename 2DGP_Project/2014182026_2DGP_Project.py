@@ -8,6 +8,23 @@ map_number = 1
 # 캐릭터 스프라이트의 머리는 4, 900 부터 X 40, Y 30 (글자위치 10)
 # 몸통은 8, 850부터 X32, Y30, 머리로부터 Y를 15만큼 빼준다.
 # 맵타일은 한칸에 X, Y 각 65
+class Character:
+    def __init__(self):
+        self.x, self.y = 50, 50
+        self.x_dir, self.y_dir = 0
+        self.left_move, self.right_move, self.up_move, self.down_move = False
+        self.idling = False
+        self.head, self.body = 0
+        self.head_frame , self.body_frame = 0
+        self.weapon = random.randint(1, 3)
+        if self.weapon == 1:
+            self.image = load_image('Gunner.png')
+        elif self.weapon == 2:
+            self.image = load_image('sniper.png')
+        elif self.weapon == 3:
+            self.image = load_image('cannoneer.png')
+
+
 def handle_events():
     global running
     global character_head, character_body
