@@ -12,6 +12,7 @@ def handle_events():
     global running
     global character_head, character_body
     global left_move, right_move, up_move, down_move
+    global mouse_x, mouse_y
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -31,7 +32,8 @@ def handle_events():
 
             elif event.key == SDLK_ESCAPE:
                 running = False
-
+        elif event.type == SDL_MOUSEMOTION:
+            mouse_x, mouse_y = event.x, 768 - 1 - event.y
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_w:
                 up_move = False
@@ -60,8 +62,13 @@ character_body_frame = 0
 character_body = 0
 character_x = 50
 character_y = 50
-open_canvas()
+mouse_x = 0
+mouse_y = 0
 
+open_canvas(1024, 768)
+hide_cursor()
+
+mouse = load_image('Target.png')
 map = load_image("Tiles.png")
 
 def draw_map():
@@ -139,8 +146,9 @@ while running:
 
     clear_canvas()
     draw_map()
+    mouse.clip_draw(0, 0, 50, 50, mouse_x, mouse_y)
     character.clip_draw(8 + 32*character_body_frame, 850 - 42*character_body, 32, 30, character_x, character_y - 15)
     character.clip_draw(4 + 40*character_head + 40*character_head_frame, 900, 40, 30, character_x, character_y)
     update_canvas()
-    delay(0.025)
+    delay(0.01)
     handle_events()
