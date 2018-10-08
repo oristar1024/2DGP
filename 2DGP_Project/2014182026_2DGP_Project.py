@@ -85,7 +85,7 @@ elif weapon == 3:
 
 
 while running:
-    idling_timer = (idling_timer+1) % 20
+    idling_timer = (idling_timer+1) % 30
 
     if x_dir != 0 or y_dir != 0:
         character_body_frame = (character_body_frame+1) % 10
@@ -142,5 +142,5 @@ while running:
     character.clip_draw(8 + 32*character_body_frame, 850 - 42*character_body, 32, 30, character_x, character_y - 15)
     character.clip_draw(4 + 40*character_head + 40*character_head_frame, 900, 40, 30, character_x, character_y)
     update_canvas()
-    delay(0.05)
+    delay(0.025)
     handle_events()
