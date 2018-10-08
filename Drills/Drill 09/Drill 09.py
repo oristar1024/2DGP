@@ -35,12 +35,12 @@ class Ball:
 
     def update(self):
         if self.big == 1:
-            if self.y > 70:
+            if self.y - self.speed > 70:
                 self.y -= self.speed
             else:
                 self.y = 70
         else:
-            if self.y > 60:
+            if self.y - self.speed > 60:
                 self.y -= self.speed
             else:
                 self.y = 60
