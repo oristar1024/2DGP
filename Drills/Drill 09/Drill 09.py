@@ -44,6 +44,7 @@ open_canvas()
 
 grass = Grass()
 team = [Boy() for i in range(11)]
+balls = [Ball() for i in range(20)]
 
 running = True
 
@@ -51,11 +52,15 @@ while running:
     handle_events()
     for boy in team:
         boy.update()
+    for ball in balls:
+        ball.update()
 
     clear_canvas()
     grass.draw()
     for boy in team:
         boy.draw()
+    for ball in balls:
+        ball.draw()
     update_canvas()
 
     delay(0.05)
