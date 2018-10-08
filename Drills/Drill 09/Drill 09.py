@@ -23,7 +23,13 @@ class Boy:
 
 class Ball:
     def __init__(self):
-        pass
+        self.x, self.y = random.randint(50, 750), 550
+        self.speed = random.uniform(5, 15)
+        self.big = random.randint(0, 1)
+        if self.big == 1:
+            self.image = load_image('ball41x41.png')
+        else:
+            self.image = load_image('ball21x21.png')
 
     def update(self):
         pass
