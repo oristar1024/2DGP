@@ -1,6 +1,6 @@
 from pico2d import *
 import random
-
+import math
 # 캐릭터 스프라이트의 머리는 4, 900 부터 X 40, Y 30 (글자위치 10)
 # 몸통은 8, 850부터 X32, Y30, 머리로부터 Y를 15만큼 빼준다.
 # 맵타일은 한칸에 X, Y 각 65
@@ -15,12 +15,19 @@ class Character:
         self.head, self.body = 0, 0
         self.head_frame , self.body_frame = 0, 0
         self.weapon = random.randint(1, 3)
+
         if self.weapon == 1:
-            self.image = load_image('Gunner.png')
+            self.image = load_image('assassin.png')
+            self.range = 600
+            self.bullet_speed = 20
         elif self.weapon == 2:
             self.image = load_image('sniper.png')
+            self.range = 900
+            self.bullet_speed = 30
         elif self.weapon == 3:
             self.image = load_image('cannoneer.png')
+            self.range = 600
+            self.bullet_speed = 15
 
     def update(self):
         self.idling_timer = (self.idling_timer + 1) % 30
@@ -81,6 +88,32 @@ class Character:
         self.image.clip_draw(4 + 40 * self.head + 40 * self.head_frame, 900, 40, 30, self.x, self.y)
 
 
+class CharacterProjectile:
+    def __init__(self):
+        global character, mouse
+        self.image = load_image('projectile.png')
+        self.x = character.x
+        self.y = character.y
+        self.target_x = mouse.x
+        self.target_y = mouse.y
+        self.move_y = (self.target_y - self.y) / get_dist(self.x, self.y, self.target_x, self.target_y)
+        self.move_x = (self.target_x - self.x) / get_dist(self.x, self.y, self.target_x, self.target_y)
+        self.move_count = character.range / character.bullet_speed
+        self.i = 0
+    def update(self):
+        if self.i < self.move_count:
+            self.x += self.move_x * character.bullet_speed
+            self.y += self.move_y * character.bullet_speed
+            self.i += 1
+        else:
+            del self
+
+    def draw(self):
+        #if character.weapon == 1
+        self.image.clip_draw(0, 1382, 200, 200, self.x, self.y)
+
+
+
 class Mouse:
     def __init__(self):
         self.x = 50
@@ -105,11 +138,15 @@ class Map:
             self.x = 25
             self.y += 50
 
+def get_dist(x1, y1, x2, y2):
+    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 )
+
 
 def handle_events():
     global running
     global character
     global mouse
+    global character_projectile
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -131,6 +168,8 @@ def handle_events():
                 running = False
         elif event.type == SDL_MOUSEMOTION:
             mouse.x, mouse.y = event.x, 768 - 1 - event.y
+        elif event.type == SDL_MOUSEBUTTONDOWN and event.key == SDL_BUTTON_LEFT:
+            character_projectile += CharacterProjectile()
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_w:
                 character.up_move = False
@@ -148,13 +187,16 @@ def handle_events():
 running = True
 MAP_WIDTH = 4000
 MAP_HEGIHT = 3000
+SCREEN_WIDTH = 1024
+SCREEN_HEIGHT = 768
 
-open_canvas(1024, 768)
+open_canvas(SCREEN_WIDTH, SCREEN_HEIGHT)
 hide_cursor()
 
 character = Character()
 mouse = Mouse()
 map = Map()
+character_projectile = []
 
 
 while running:
