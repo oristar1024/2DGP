@@ -8,7 +8,7 @@ import math
 
 class Character:
     def __init__(self):
-        self.x, self.y = 50, 50
+        self.x, self.y = 100, 100
         self.x_dir, self.y_dir = 0, 0
         self.left_move, self.right_move, self.up_move, self.down_move = False, False, False, False
         self.idling_timer = 0
@@ -91,7 +91,7 @@ class Character:
 class CharacterProjectile:
     def __init__(self):
         global character, mouse
-        self.image = load_image('projectile.png')
+        self.image = load_image('assassin.png')
         self.x = character.x
         self.y = character.y
         self.target_x = mouse.x
@@ -100,17 +100,19 @@ class CharacterProjectile:
         self.move_x = (self.target_x - self.x) / get_dist(self.x, self.y, self.target_x, self.target_y)
         self.move_count = character.range / character.bullet_speed
         self.i = 0
+        self.delete = False
+
     def update(self):
+        global character_projectile
         if self.i < self.move_count:
             self.x += self.move_x * character.bullet_speed
             self.y += self.move_y * character.bullet_speed
             self.i += 1
         else:
-            del self
+            self.delete = True
 
     def draw(self):
-        #if character.weapon == 1
-        self.image.clip_draw(0, 1382, 200, 200, self.x, self.y)
+        self.image.clip_draw(4, 900, 40, 30, self.x, self.y)
 
 
 
@@ -147,6 +149,7 @@ def handle_events():
     global character
     global mouse
     global character_projectile
+    global projectile_array_index
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -168,8 +171,10 @@ def handle_events():
                 running = False
         elif event.type == SDL_MOUSEMOTION:
             mouse.x, mouse.y = event.x, 768 - 1 - event.y
-        elif event.type == SDL_MOUSEBUTTONDOWN and event.key == SDL_BUTTON_LEFT:
-            character_projectile += CharacterProjectile()
+        elif event.type == SDL_MOUSEBUTTONDOWN:
+            character_projectile[projectile_array_index] = CharacterProjectile()
+            projectile_array_index = (projectile_array_index + 1) % 30
+
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_w:
                 character.up_move = False
@@ -196,13 +201,29 @@ hide_cursor()
 character = Character()
 mouse = Mouse()
 map = Map()
-character_projectile = []
-
+character_projectile = [0 for i in range(30)]
+projectile_array_index = 0
 
 while running:
     character.update()
+    for projectile in character_projectile:
+        if projectile != 0:
+            projectile.update()
+            if projectile.delete:
+                del projectile
+                character_projectile += [0]
+
+    for i in range(30):
+        if character_projectile[i] != 0:
+            character_projectile[i].update()
+            if character_projectile[i].delete:
+                character_projectile[i] = 0
+
     clear_canvas()
     map.draw()
+    for projectile in character_projectile:
+        if projectile != 0:
+            projectile.draw()
     character.draw()
     mouse.draw()
     update_canvas()
