@@ -5,6 +5,17 @@ import math
 # 몸통은 8, 850부터 X32, Y30, 머리로부터 Y를 15만큼 빼준다.
 # 맵타일은 한칸에 X, Y 각 65
 
+class Monster:
+    def __init__(self):
+        self.x, self.y = random.randint(0 + 50, SCREEN_WIDTH - 50), random.randint(0 + 50, SCREEN_HEIGHT - 50)
+        self.hp = 100
+        self.image = load_image('Dummy.png')
+
+    def update(self):
+        pass
+
+    def draw(self):
+        self.image.clip_draw(0, 0, 100, 100, self.x, self.y)
 
 class Character:
     def __init__(self):
@@ -202,6 +213,7 @@ character = Character()
 mouse = Mouse()
 map = Map()
 character_projectile = [0 for i in range(30)]
+monsters = [Monster() for i in range(10)]
 projectile_array_index = 0
 
 while running:
@@ -221,9 +233,15 @@ while running:
 
     clear_canvas()
     map.draw()
+
+    for monster in monsters:
+        if monster.hp > 0:
+            monster.draw()
+
     for projectile in character_projectile:
         if projectile != 0:
             projectile.draw()
+
     character.draw()
     mouse.draw()
     update_canvas()

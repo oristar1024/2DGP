@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50ac9573-a5d0-46ad-aa12-2c1f5c6a7bd8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/Drill 10/Drill_10_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 10/Drill_10_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2014182026_2DGP_Project.py" beforeDir="false" afterPath="$PROJECT_DIR$/2014182026_2DGP_Project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC Computer - MapleStory - Straw Target Dummy.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,29 +28,46 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="png" value="1" />
-          <entry key="py" value="2" />
+          <entry key="py" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="1" />
-          <entry key="Python" value="2" />
+          <entry key="Python" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="6088" />
+          <entry key="py" value="6398" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="6088" />
+          <entry key="Python" value="6398" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/2014182026_2DGP_Project.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="227" column="23" lean-forward="true" selection-start-line="227" selection-start-column="23" selection-end-line="227" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+                <marker date="1539259507705" expanded="true" signature="175:497" ph="..." />
+                <marker date="1539259507705" expanded="true" signature="199:204" ph="..." />
+                <marker date="1539259507705" expanded="true" signature="513:4765" ph="..." />
+                <marker date="1539259507705" expanded="true" signature="3074:3991" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -69,8 +86,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="729" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="465" />
+    <option name="y" value="3" />
     <option name="width" value="1198" />
     <option name="height" value="1047" />
   </component>
@@ -152,7 +170,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="729" y="0" width="1198" height="1047" extended-state="1" />
+    <frame x="465" y="3" width="1198" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -164,7 +182,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Version Control" order="5" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.32785088" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32785088" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -185,15 +203,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/2014182026_2DGP_Project.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="206" column="14" selection-start-line="206" selection-start-column="14" selection-end-line="206" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projectile.png">
       <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2014182026_2DGP_Project.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="227" column="23" lean-forward="true" selection-start-line="227" selection-start-column="23" selection-end-line="227" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <marker date="1539259507705" expanded="true" signature="175:497" ph="..." />
+            <marker date="1539259507705" expanded="true" signature="199:204" ph="..." />
+            <marker date="1539259507705" expanded="true" signature="513:4765" ph="..." />
+            <marker date="1539259507705" expanded="true" signature="3074:3991" ph="..." />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
