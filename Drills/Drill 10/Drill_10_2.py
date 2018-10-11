@@ -1,6 +1,7 @@
 import game_framework
 from pico2d import *
 
+import main_state
 
 name = "Drill_10_2"
 image = None
@@ -27,6 +28,8 @@ def draw():
     global image
     clear_canvas()
     image.draw(400, 300)
+    main_state.grass.draw()
+    main_state.boy.draw()
     update_canvas()
 
 
