@@ -4,7 +4,6 @@ import math
 # 캐릭터 스프라이트의 머리는 4, 900 부터 X 40, Y 30 (글자위치 10)
 # 몸통은 8, 850부터 X32, Y30, 머리로부터 Y를 15만큼 빼준다.
 # 맵타일은 한칸에 X, Y 각 65
-
 class Monster:
     def __init__(self):
         self.x, self.y = random.randint(0 + 50, SCREEN_WIDTH - 50), random.randint(0 + 50, SCREEN_HEIGHT - 50)
@@ -33,14 +32,17 @@ class Character:
             self.image = load_image('assassin.png')
             self.range = 600
             self.bullet_speed = 20
+            self.damage = 20
         elif self.weapon == 2:
             self.image = load_image('sniper.png')
             self.range = 900
             self.bullet_speed = 30
-        elif self.weapon == 3:
+            self.damage = 70
+        else:
             self.image = load_image('cannoneer.png')
             self.range = 600
             self.bullet_speed = 15
+            self.damage = 50
 
     def update(self):
         global character_projectile
@@ -175,6 +177,12 @@ class Map:
 
 def get_dist(x1, y1, x2, y2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 )
+
+def crush_check_line(projectile_x, projectile_y, box_x1, box_y1, box_x2, box_y2):
+    pass
+
+def crush_check_box(box1_x1, box1_y1, box1_x2, box1_y2, box2_x1, box2_y1, box2_x2, box2_y2):
+    pass
 
 
 def handle_events():
