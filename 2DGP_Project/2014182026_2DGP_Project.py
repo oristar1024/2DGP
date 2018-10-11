@@ -26,6 +26,8 @@ class Character:
         self.head, self.body = 0, 0
         self.head_frame , self.body_frame = 0, 0
         self.weapon = random.randint(1, 3)
+        self.can_attack = True
+        self.attack_delay_checker = 0
 
         if self.weapon == 1:
             self.image = load_image('assassin.png')
@@ -41,7 +43,27 @@ class Character:
             self.bullet_speed = 15
 
     def update(self):
+        global character_projectile
+        global projectile_array_index
+
         self.idling_timer = (self.idling_timer + 1) % 30
+
+        if self.weapon == 1 and self.can_attack == False:
+            if self.attack_delay_checker == self.idling_timer - 2 or self.attack_delay_checker == self.idling_timer + 28:
+                character_projectile[projectile_array_index] = CharacterProjectile()
+                projectile_array_index = (projectile_array_index + 1) % 30
+            elif self.attack_delay_checker == self.idling_timer - 4 or self.attack_delay_checker == self.idling_timer + 26:
+                character_projectile[projectile_array_index] = CharacterProjectile()
+                projectile_array_index = (projectile_array_index + 1) % 30
+            elif self.attack_delay_checker == self.idling_timer - 6 or self.attack_delay_checker == self.idling_timer + 24:
+                character_projectile[projectile_array_index] = CharacterProjectile()
+                projectile_array_index = (projectile_array_index + 1) % 30
+            elif self.attack_delay_checker == self.idling_timer - 8 or self.attack_delay_checker == self.idling_timer + 22:
+                character_projectile[projectile_array_index] = CharacterProjectile()
+                projectile_array_index = (projectile_array_index + 1) % 30
+
+        if self.attack_delay_checker == self.idling_timer - 10 or self.attack_delay_checker == self.idling_timer + 20:
+            self.can_attack = True
 
         if self.x_dir != 0 or self.y_dir != 0:
             self.body_frame = (self.body_frame + 1) % 10
@@ -182,9 +204,11 @@ def handle_events():
                 running = False
         elif event.type == SDL_MOUSEMOTION:
             mouse.x, mouse.y = event.x, 768 - 1 - event.y
-        elif event.type == SDL_MOUSEBUTTONDOWN:
+        elif event.type == SDL_MOUSEBUTTONDOWN and character.can_attack:
             character_projectile[projectile_array_index] = CharacterProjectile()
             projectile_array_index = (projectile_array_index + 1) % 30
+            character.can_attack = False
+            character.attack_delay_checker = character.idling_timer
 
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_w:
