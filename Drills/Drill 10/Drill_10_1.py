@@ -1,6 +1,5 @@
 import game_framework
 from pico2d import *
-import main_state
 
 
 name = "Drill_10_1"
@@ -25,7 +24,10 @@ def handle_events():
 
 
 def draw():
-    pass
+    global image
+    clear_canvas()
+    image.draw(400, 300)
+    update_canvas()
 
 
 
