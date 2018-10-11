@@ -2,7 +2,7 @@ import game_framework
 from pico2d import *
 
 
-name = "Drill_10_1"
+name = "Drill_10_2"
 image = None
 
 
