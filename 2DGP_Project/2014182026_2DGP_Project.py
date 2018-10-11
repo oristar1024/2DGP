@@ -125,7 +125,7 @@ class Character:
 
 class CharacterProjectile:
     def __init__(self):
-        global character, mouse
+        global character, mouse, monsters
         self.image = load_image('assassin.png')
         self.x = character.x
         self.y = character.y
@@ -136,15 +136,25 @@ class CharacterProjectile:
         self.move_count = character.range / character.bullet_speed
         self.i = 0
         self.delete = False
+        self.old_x, self.old_y = self.x, self.y
 
     def update(self):
         global character_projectile
         if self.i < self.move_count:
+            self.old_x, self.old_y = self.x, self.y
             self.x += self.move_x * character.bullet_speed
             self.y += self.move_y * character.bullet_speed
             self.i += 1
         else:
             self.delete = True
+
+        for monster in monsters:
+            if monster.hp > 0 and crush_check_line(self.old_x, self.old_y, self.x, self.y, monster.x, monster.y):
+                monster.hp -= character.damage
+                if character.weapon != 2:
+                    self.delete = True
+
+
 
     def draw(self):
         self.image.clip_draw(4, 900, 40, 30, self.x, self.y)
@@ -178,7 +188,7 @@ class Map:
 def get_dist(x1, y1, x2, y2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 )
 
-def crush_check_line(projectile_x, projectile_y, box_x1, box_y1, box_x2, box_y2):
+def crush_check_line(x1, y1, x2, y2, monster_x, monster_y):
     pass
 
 def crush_check_box(box1_x1, box1_y1, box1_x2, box1_y2, box2_x1, box2_y1, box2_x2, box2_y2):
@@ -216,7 +226,7 @@ def handle_events():
             character_projectile[projectile_array_index] = CharacterProjectile()
             projectile_array_index = (projectile_array_index + 1) % 30
             character.can_attack = False
-            character.attack_delay_checker = character.idling_timer
+            character.attack_delay_checker = character.idling_timer + 1
 
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_w:
