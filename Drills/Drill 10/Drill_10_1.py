@@ -8,11 +8,13 @@ image = None
 
 
 def enter():
-    pass
+    global image
+    image = load_image('pause.png')
 
 
 def exit():
-    pass
+    global image
+    del(image)
 
 
 def handle_events():
