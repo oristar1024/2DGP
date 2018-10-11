@@ -42,7 +42,13 @@ def draw():
 
 
 def update():
-    pass
+    global switch
+    if switch:
+        switch = False
+        delay(0.3)
+    else:
+        switch = True
+        delay(0.15)
 
 
 def pause():
