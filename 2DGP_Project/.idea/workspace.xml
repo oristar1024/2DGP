@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="50ac9573-a5d0-46ad-aa12-2c1f5c6a7bd8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Drills/Drill 10/main_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 10/main_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/Drill 10/mygame.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 10/mygame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/Drill 10/simple_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 10/simple_module.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/Drill 10/start_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 10/start_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/Drill 10/title_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 10/title_state.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
