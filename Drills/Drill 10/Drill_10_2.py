@@ -5,10 +5,12 @@ import main_state
 
 name = "Drill_10_2"
 image = None
+switch = None
 
 
 def enter():
-    global image
+    global image, switch
+    switch = False
     image = load_image('pause.png')
 
 
@@ -27,7 +29,8 @@ def handle_events():
 def draw():
     global image
     clear_canvas()
-    image.draw(400, 300)
+    if switch:
+        image.draw(400, 300)
     main_state.grass.draw()
     main_state.boy.draw()
     update_canvas()
