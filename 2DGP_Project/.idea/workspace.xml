@@ -20,8 +20,8 @@
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="3" />
-          <entry key="project.open.time.5" value="2" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.open.time.5" value="3" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -38,31 +38,32 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="7326" />
+          <entry key="py" value="8908" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="7326" />
+          <entry key="Python" value="8908" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/2014182026_2DGP_Project.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="625">
-              <caret line="211" column="37" lean-forward="true" selection-start-line="211" selection-start-column="37" selection-end-line="211" selection-end-column="37" />
+            <state relative-caret-position="437">
+              <caret line="209" column="54" selection-start-line="209" selection-start-column="54" selection-end-line="209" selection-end-column="54" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
-                <marker date="1539263820955" expanded="true" signature="159:160" ph="..." />
-                <marker date="1539263820955" expanded="true" signature="174:496" ph="..." />
-                <marker date="1539263820955" expanded="true" signature="198:203" ph="..." />
-                <marker date="1539263820955" expanded="true" signature="512:6887" ph="..." />
-                <marker date="1539263820955" expanded="true" signature="4635:5940" ph="..." />
-                <marker date="1539263820955" expanded="true" signature="6875:6887" ph="..." />
+                <marker date="1539339649654" expanded="true" signature="159:160" ph="..." />
+                <marker date="1539339649654" expanded="true" signature="174:632" ph="..." />
+                <marker date="1539339649654" expanded="true" signature="198:203" ph="..." />
+                <marker date="1539339649654" expanded="true" signature="648:7660" ph="..." />
+                <marker date="1539339649654" expanded="true" signature="4771:6118" ph="..." />
+                <marker date="1539339649654" expanded="true" signature="7170:7556" ph="..." />
+                <marker date="1539339649654" expanded="true" signature="7648:7660" ph="..." />
               </folding>
             </state>
           </provider>
@@ -87,9 +88,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="465" />
-    <option name="y" value="3" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="763" />
+    <option name="y" value="35" />
     <option name="width" value="1198" />
     <option name="height" value="1047" />
   </component>
@@ -171,7 +172,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="465" y="3" width="1198" height="1047" extended-state="0" />
+    <frame x="763" y="35" width="1198" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -183,7 +184,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Version Control" order="5" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.32785088" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32785088" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.3991228" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -209,16 +210,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/2014182026_2DGP_Project.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="211" column="37" lean-forward="true" selection-start-line="211" selection-start-column="37" selection-end-line="211" selection-end-column="37" />
+        <state relative-caret-position="437">
+          <caret line="209" column="54" selection-start-line="209" selection-start-column="54" selection-end-line="209" selection-end-column="54" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-            <marker date="1539263820955" expanded="true" signature="159:160" ph="..." />
-            <marker date="1539263820955" expanded="true" signature="174:496" ph="..." />
-            <marker date="1539263820955" expanded="true" signature="198:203" ph="..." />
-            <marker date="1539263820955" expanded="true" signature="512:6887" ph="..." />
-            <marker date="1539263820955" expanded="true" signature="4635:5940" ph="..." />
-            <marker date="1539263820955" expanded="true" signature="6875:6887" ph="..." />
+            <marker date="1539339649654" expanded="true" signature="159:160" ph="..." />
+            <marker date="1539339649654" expanded="true" signature="174:632" ph="..." />
+            <marker date="1539339649654" expanded="true" signature="198:203" ph="..." />
+            <marker date="1539339649654" expanded="true" signature="648:7660" ph="..." />
+            <marker date="1539339649654" expanded="true" signature="4771:6118" ph="..." />
+            <marker date="1539339649654" expanded="true" signature="7170:7556" ph="..." />
+            <marker date="1539339649654" expanded="true" signature="7648:7660" ph="..." />
           </folding>
         </state>
       </provider>
