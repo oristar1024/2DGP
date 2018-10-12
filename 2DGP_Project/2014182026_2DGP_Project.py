@@ -13,9 +13,12 @@ class Monster:
         self.box_x2 = self.x + 50
         self.box_y1 = self.y - 50
         self.box_y2 = self.y + 50
+        self.hit = False
+        self.hitchecker = 0
 
     def update(self):
-        pass
+        if self.hit and (self.hitchecker == character.idling_timer - 10 or self.hitchecker == character.idling_timer + 20):
+            self.hit = False
 
     def draw(self):
         self.image.clip_draw(0, 0, 100, 100, self.x, self.y)
@@ -153,10 +156,13 @@ class CharacterProjectile:
             self.delete = True
 
         for monster in monsters:
-            if monster.hp > 0 and crush_check_line(self.old_x, self.old_y, self.x, self.y, monster.box_x1, monster.box_y1, monster.box_x2, monster.box_y2):
+            if monster.hit == False and monster.hp > 0 and crush_check_line(self.old_x, self.old_y, self.x, self.y, monster.box_x1, monster.box_y1, monster.box_x2, monster.box_y2):
                 monster.hp -= character.damage
                 if character.weapon != 2:
                     self.delete = True
+                else:
+                    monster.hit = True
+                    monster.hitchecker = character.idling_timer
 
 
 
@@ -284,18 +290,14 @@ projectile_array_index = 0
 
 while running:
     character.update()
-    for projectile in character_projectile:
-        if projectile != 0:
-            projectile.update()
-            if projectile.delete:
-                del projectile
-                character_projectile += [0]
-
     for i in range(30):
         if character_projectile[i] != 0:
             character_projectile[i].update()
             if character_projectile[i].delete:
                 character_projectile[i] = 0
+
+    for monster in monsters:
+        monster.update()
 
     clear_canvas()
     map.draw()
