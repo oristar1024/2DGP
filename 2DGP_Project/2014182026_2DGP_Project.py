@@ -133,7 +133,7 @@ class Character:
 class CharacterProjectile:
     def __init__(self):
         global character, mouse, monsters
-        self.image = load_image('assassin.png')
+        self.image = load_image('projectile.png')
         self.x = character.x
         self.y = character.y
         self.target_x = mouse.x
@@ -144,30 +144,54 @@ class CharacterProjectile:
         self.i = 0
         self.delete = False
         self.old_x, self.old_y = self.x, self.y
+        self.frame = 0
+        self.bomb = False
 
     def update(self):
         global character_projectile
-        if self.i < self.move_count:
+        if self.i < self.move_count and self.bomb == False:
             self.old_x, self.old_y = self.x, self.y
             self.x += self.move_x * character.bullet_speed
             self.y += self.move_y * character.bullet_speed
             self.i += 1
+            if character.weapon != 3:
+                self.frame = (self.frame + 1) % 2
+            elif character.weapon == 3:
+                self.frame = (self.frame + 1) % 4
         else:
-            self.delete = True
+            if character.weapon != 3:
+                self.delete = True
+            elif character.weapon == 3:
+                if self.frame == 5:
+                    for monster in monsters:
+                        if monster.hp > 0 and get_dist(self.x, self.y, monster.x, monster.y) <= 150:
+                            monster.hp -= character.damage
+                elif self.frame == 7:
+                    self.delete = True
+                self.bomb = True
+                self.frame = (self.frame + 1) % 8
 
         for monster in monsters:
             if monster.hit == False and monster.hp > 0 and crush_check_line(self.old_x, self.old_y, self.x, self.y, monster.box_x1, monster.box_y1, monster.box_x2, monster.box_y2):
-                monster.hp -= character.damage
-                if character.weapon != 2:
-                    self.delete = True
-                else:
-                    monster.hit = True
-                    monster.hitchecker = character.idling_timer
+                if character.weapon == 3:
+                    self.bomb = True
+                elif character.weapon != 3:
+                    monster.hp -= character.damage
+                    if character.weapon == 1:
+                        self.delete = True
+                    if character.weapon == 2:
+                        monster.hit = True
+                        monster.hitchecker = character.idling_timer
 
 
 
     def draw(self):
-        self.image.clip_draw(4, 900, 40, 30, self.x, self.y)
+        if character.weapon == 1:
+            self.image.clip_draw(0 + 90 * self.frame, 450, 90, 50, self.x, self.y)
+        elif character.weapon == 2:
+            self.image.clip_draw(0 + 90 * self.frame, 720, 90, 50, self.x, self.y)
+        if character.weapon == 3:
+            self.image.clip_draw(0 + 90 * self.frame, 1200, 90, 150, self.x, self.y)
 
 
 
