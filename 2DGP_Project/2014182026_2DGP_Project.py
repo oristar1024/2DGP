@@ -127,8 +127,11 @@ class Character:
             self.head_frame -= 1
 
     def draw(self):
-        self.image.clip_draw(8 + 32 * self.body_frame, 850 - 42 * self.body, 32, 30, self.x, self.y - 15)
-        self.image.clip_draw(4 + 40 * self.head + 40 * self.head_frame, 900, 40, 30, self.x, self.y)
+        if self.body == 1 and self.left_move:
+            self.image.clip_composite_draw(8 + 32 * self.body_frame, 850 - 42 * self.body, 32, 30, 0, 'h', self.x, self.y - 15)
+        else:
+            self.image.clip_draw(8 + 32 * self.body_frame, 850 - 42 * self.body, 32, 30, self.x, self.y - 15)
+            self.image.clip_draw(4 + 40 * self.head + 40 * self.head_frame, 900, 40, 30, self.x, self.y)
 
 
 class CharacterProjectile:
@@ -141,12 +144,15 @@ class CharacterProjectile:
         self.target_y = mouse.y
         self.move_y = (self.target_y - self.y) / get_dist(self.x, self.y, self.target_x, self.target_y)
         self.move_x = (self.target_x - self.x) / get_dist(self.x, self.y, self.target_x, self.target_y)
+        self.rad = math.acos(self.move_x)
         self.move_count = character.range / character.bullet_speed
         self.i = 0
         self.delete = False
         self.old_x, self.old_y = self.x, self.y
         self.frame = 0
         self.bomb = False
+        if self.y > self.target_y:
+            self.rad = -self.rad
 
     def update(self):
         global character_projectile
@@ -188,11 +194,11 @@ class CharacterProjectile:
 
     def draw(self):
         if character.weapon == 1:
-            self.image.clip_draw(0 + 90 * self.frame, 450, 90, 50, self.x, self.y)
+            self.image.clip_composite_draw(0 + 90 * self.frame, 450, 90, 50, self.rad + 3.14, 'n', self.x, self.y)
         elif character.weapon == 2:
-            self.image.clip_draw(0 + 90 * self.frame, 720, 90, 50, self.x, self.y)
+            self.image.clip_composite_draw(0 + 90 * self.frame, 720, 90, 50, self.rad + 3.14, 'n', self.x, self.y)
         if character.weapon == 3:
-            self.image.clip_draw(0 + 90 * self.frame, 1200, 90, 150, self.x, self.y)
+            self.image.clip_composite_draw(0 + 90 * self.frame, 1200, 90, 150, self.rad + 3.14, 'n', self.x, self.y)
 
 
 
