@@ -34,21 +34,22 @@ class Character:
         self.weapon = random.randint(1, 3)
         self.can_attack = True
         self.attack_delay_checker = 0
+        self.bomb_range = 150
 
         if self.weapon == 1:
             self.image = load_image('assassin.png')
             self.range = 600
-            self.bullet_speed = 20
+            self.bullet_speed = 50
             self.damage = 20
         elif self.weapon == 2:
             self.image = load_image('sniper.png')
-            self.range = 900
-            self.bullet_speed = 30
+            self.range = 720
+            self.bullet_speed = 60
             self.damage = 70
         else:
             self.image = load_image('cannoneer.png')
-            self.range = 600
-            self.bullet_speed = 15
+            self.range = 480
+            self.bullet_speed = 40
             self.damage = 50
 
     def update(self):
@@ -164,7 +165,7 @@ class CharacterProjectile:
             elif character.weapon == 3:
                 if self.frame == 5:
                     for monster in monsters:
-                        if monster.hp > 0 and get_dist(self.x, self.y, monster.x, monster.y) <= 150:
+                        if monster.hp > 0 and get_dist(self.x, self.y, monster.x, monster.y) <= character.bomb_range:
                             monster.hp -= character.damage
                 elif self.frame == 7:
                     self.delete = True
