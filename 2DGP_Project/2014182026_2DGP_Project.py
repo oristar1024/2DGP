@@ -34,7 +34,7 @@ class Character:
         self.weapon = random.randint(1, 3)
         self.can_attack = True
         self.attack_delay_checker = 0
-        self.bomb_range = 150
+        self.bomb_range = 120
 
         if self.weapon == 1:
             self.image = load_image('assassin.png')
@@ -177,9 +177,11 @@ class CharacterProjectile:
                     self.delete = True
                 self.bomb = True
                 self.frame = (self.frame + 1) % 8
+                self.x += self.move_x * 15
+                self.y += self.move_y * 15
 
         for monster in monsters:
-            if monster.hit == False and monster.hp > 0 and crush_check_line(self.old_x, self.old_y, self.x, self.y, monster.box_x1, monster.box_y1, monster.box_x2, monster.box_y2):
+            if monster.hit == False and monster.hp > 0 and crush_check_line(self.old_x, self.old_y, self.x + self.move_x * 35, self.y + self.move_y * 25, monster.box_x1, monster.box_y1, monster.box_x2, monster.box_y2):
                 if character.weapon == 3:
                     self.bomb = True
                 elif character.weapon != 3:
