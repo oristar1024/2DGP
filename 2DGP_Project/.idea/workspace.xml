@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50ac9573-a5d0-46ad-aa12-2c1f5c6a7bd8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/animation_sheet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/boy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/boys_team_1000.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/game_framework.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/grass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/grass.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/main_state.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/mygame.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/lecture 10/run_animation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Drills/Drill 11/boy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 11/boy.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -176,8 +165,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="6" />
+    <option name="y" value="24" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
@@ -285,7 +275,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
