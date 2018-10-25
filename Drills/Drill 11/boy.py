@@ -122,7 +122,11 @@ class DashState:
 
     @staticmethod
     def exit(boy, event):
-        pass
+        if event == SHIFT_UP or event == DASH_TIMER:
+            boy.velocity = boy.velocity / 5
+
+        elif event == SPACE:
+            boy.fire_ball()
 
     @staticmethod
     def do(boy):
