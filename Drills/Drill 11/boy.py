@@ -130,7 +130,13 @@ class DashState:
 
     @staticmethod
     def do(boy):
-        pass
+        boy.frame = (boy.frame + 1) % 8
+        boy.timer -= 1
+        boy.dash_timer -= 1
+        boy.x += boy.velocity
+        boy.x = clamp(25, boy.x, 1600 - 25)
+        if boy.dash_timer == 0:
+            boy.add_event(DASH_TIMER)
 
     @staticmethod
     def draw(boy):
