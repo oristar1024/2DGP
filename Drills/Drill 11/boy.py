@@ -116,7 +116,9 @@ class DashState:
 
     @staticmethod
     def enter(boy, event):
-        pass
+        if event == SHIFT_DOWN:
+            boy.dash_timer = 50
+            boy.velocity = boy.velocity * 5
 
     @staticmethod
     def exit(boy, event):
