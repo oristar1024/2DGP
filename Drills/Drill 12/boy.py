@@ -3,10 +3,11 @@ from pico2d import *
 from ball import Ball
 import random
 import game_world
-
+import math
 # Boy Run Speed
 # fill expressions correctly
 PIXEL_PER_METER = (10.0 / 0.3) # 10pixel 30cm, 100pixel 3m
+ANGLE_PER_SECOND = 720
 RUN_SPEED_KMPH = 20.0 # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
@@ -47,7 +48,7 @@ class IdleState:
         elif event == LEFT_UP:
             boy.velocity += RUN_SPEED_PPS
         boy.timer = get_time()
-        boy.idletime = boy.timer + 2.6
+        boy.idletime = boy.timer + 10.0
 
     @staticmethod
     def exit(boy, event):
@@ -109,8 +110,10 @@ class SleepState:
     def enter(boy, event):
         boy.frame = 0
         boy.opac = random.randint(0, 1000) / 1000
-        boy.ghost_timer = get_time()
-        boy.ghost_wakeup = get_time() + 1.0
+        boy.start_timer = get_time()
+        boy.ghost_timer = boy.start_timer
+        boy.elapse_time = 0
+        boy.r = PIXEL_PER_METER * 3
     @staticmethod
     def exit(boy, event):
         boy.image.opacify(1)
@@ -119,6 +122,7 @@ class SleepState:
     def do(boy):
         boy.opac = random.randint(0, 1000) / 1000
         boy.ghost_timer = get_time()
+        boy.elapse_time = boy.ghost_timer - boy.start_timer
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
 
     @staticmethod
@@ -127,12 +131,18 @@ class SleepState:
             boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
             boy.image.opacify(boy.opac)
-            if boy.ghost_wakeup > boy.ghost_timer:
-                boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, (3.141592 * (boy.ghost_wakeup - boy.ghost_timer)) / 2, '', boy.x - 25, boy.y + (-25 * (boy.ghost_wakeup - boy.ghost_timer)), 100, 100)
+            if boy.elapse_time < 1:
+                boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, (3.141592 - (boy.elapse_time * 3.141592)) / 2, '', boy.x - (25 - (boy.elapse_time * 25)), boy.y - (25 - (boy.elapse_time * 25)) , 100, 100)
+            else:
+                boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.r * math.cos(math.radians(270 + ANGLE_PER_SECOND * (boy.elapse_time % 1))) + boy.x, 100 * math.sin(math.radians(270 + 720 * (boy.elapse_time % 1))) + boy.y * 2)
         else:
             boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
             boy.image.opacify(boy.opac)
+            if boy.elapse_time < 1:
+                boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, (-3.141592 + (boy.elapse_time * 3.141592)) / 2, '', boy.x + (25 - (boy.elapse_time * 25)), boy.y - (25 - (boy.elapse_time * 25)) , 100, 100)
+            else:
+                boy.image.clip_draw(int(boy.frame) * 100, 200, 100, 100, boy.r * math.cos(math.radians(270 + ANGLE_PER_SECOND * (boy.elapse_time % 1))) + boy.x, 100 * math.sin(math.radians(270 + 720 * (boy.elapse_time % 1))) + boy.y * 2)
 
 
 
