@@ -1,22 +1,22 @@
 import game_framework
 from pico2d import *
 from ball import Ball
-
+import random
 import game_world
 
 # Boy Run Speed
 # fill expressions correctly
-PIXEL_PER_METER = 0
-RUN_SPEED_KMPH = 0
-RUN_SPEED_MPM = 0
-RUN_SPEED_MPS = 0
-RUN_SPEED_PPS = 0
+PIXEL_PER_METER = (10.0 / 0.3) # 10pixel 30cm, 100pixel 3m
+RUN_SPEED_KMPH = 20.0 # Km / Hour
+RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60)
+RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
+RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # Boy Action Speed
 # fill expressions correctly
-TIME_PER_ACTION = 0
-ACTION_PER_TIME = 0
-FRAMES_PER_ACTION = 0
+TIME_PER_ACTION = 0.5
+ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
+FRAMES_PER_ACTION = 8
 
 
 
@@ -46,7 +46,8 @@ class IdleState:
             boy.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
             boy.velocity += RUN_SPEED_PPS
-        boy.timer = 1000
+        boy.timer = get_time()
+        boy.idletime = boy.timer + 2.6
 
     @staticmethod
     def exit(boy, event):
@@ -56,9 +57,9 @@ class IdleState:
 
     @staticmethod
     def do(boy):
+        boy.timer = get_time()
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        boy.timer -= 1
-        if boy.timer == 0:
+        if boy.idletime <= boy.timer:
             boy.add_event(SLEEP_TIMER)
 
     @staticmethod
@@ -73,8 +74,15 @@ class RunState:
 
     @staticmethod
     def enter(boy, event):
-        # fill here
-        pass
+        if event == RIGHT_DOWN:
+            boy.velocity += RUN_SPEED_PPS
+        elif event == LEFT_DOWN:
+            boy.velocity -= RUN_SPEED_PPS
+        elif event == RIGHT_UP:
+            boy.velocity -= RUN_SPEED_PPS
+        elif event == LEFT_UP:
+            boy.velocity += RUN_SPEED_PPS
+            boy.dir = clamp(-1, boy.velocity, 1)
 
     @staticmethod
     def exit(boy, event):
@@ -83,8 +91,8 @@ class RunState:
 
     @staticmethod
     def do(boy):
-        boy.frame = (boy.frame + 1) % 8
-        # fill here
+        boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        boy.x += boy.velocity * game_framework.frame_time
         boy.x = clamp(25, boy.x, 1600 - 25)
 
     @staticmethod
@@ -100,22 +108,27 @@ class SleepState:
     @staticmethod
     def enter(boy, event):
         boy.frame = 0
-
+        boy.opac = random.randint(0, 1000) / 1000
     @staticmethod
     def exit(boy, event):
         pass
 
     @staticmethod
     def do(boy):
+        boy.opac = random.randint(0, 1000) / 1000
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
 
     @staticmethod
     def draw(boy):
         if boy.dir == 1:
+            boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
-        else:
-            boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
+            boy.image.opacify(boy.opac)
 
+        else:
+            boy.image.opacify(1)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
+            boy.image.opacify(boy.opac)
 
 
 
@@ -133,7 +146,7 @@ class Boy:
         self.x, self.y = 1600 // 2, 90
         # Boy is only once created, so instance image loading is fine
         self.image = load_image('animation_sheet.png')
-        # fill here
+        self.font = load_font('ENCR10B.TTF', 16)
         self.dir = 1
         self.velocity = 0
         self.frame = 0
@@ -143,7 +156,7 @@ class Boy:
 
 
     def fire_ball(self):
-        ball = Ball(self.x, self.y, self.dir*3)
+        ball = Ball(self.x, self.y, self.dir*RUN_SPEED_PPS*3)
         game_world.add_object(ball, 1)
 
 
@@ -160,7 +173,7 @@ class Boy:
 
     def draw(self):
         self.cur_state.draw(self)
-        # fill here
+        self.font.draw(self.x - 60, self.y + 50, '(Time : %3.2f)' % get_time(), (255,255,0))
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
