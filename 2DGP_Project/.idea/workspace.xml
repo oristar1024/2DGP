@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50ac9573-a5d0-46ad-aa12-2c1f5c6a7bd8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Drills/Drill 12/boy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 12/boy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/Drill 12/game_framework.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 12/game_framework.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Drills/Drill 12/mygame.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Drills/Drill 12/mygame.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -82,7 +82,7 @@ class RunState:
             boy.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
             boy.velocity += RUN_SPEED_PPS
-            boy.dir = clamp(-1, boy.velocity, 1)
+        boy.dir = clamp(-1, boy.velocity, 1)
 
     @staticmethod
     def exit(boy, event):
@@ -109,13 +109,16 @@ class SleepState:
     def enter(boy, event):
         boy.frame = 0
         boy.opac = random.randint(0, 1000) / 1000
+        boy.ghost_timer = get_time()
+        boy.ghost_wakeup = get_time() + 1.0
     @staticmethod
     def exit(boy, event):
-        pass
+        boy.image.opacify(1)
 
     @staticmethod
     def do(boy):
         boy.opac = random.randint(0, 1000) / 1000
+        boy.ghost_timer = get_time()
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
 
     @staticmethod
@@ -124,7 +127,8 @@ class SleepState:
             boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
             boy.image.opacify(boy.opac)
-
+            if boy.ghost_wakeup > boy.ghost_timer:
+                boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, (3.141592 * (boy.ghost_wakeup - boy.ghost_timer)) / 2, '', boy.x - 25, boy.y + (-25 * (boy.ghost_wakeup - boy.ghost_timer)), 100, 100)
         else:
             boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
