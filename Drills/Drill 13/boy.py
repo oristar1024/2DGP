@@ -70,9 +70,11 @@ class WalkingState:
         boy.x += boy.x_velocity * game_framework.frame_time
         boy.y += boy.y_velocity * game_framework.frame_time
 
-        boy.x = clamp(0, boy.x, boy.bg.w)
         boy.y = clamp(0, boy.y, boy.bg.h)
-
+        boy.x = clamp(boy.y // 5.5, boy.x, (10120-boy.y) // 5.5)
+        #펜스의 시작위치는 200, 1640
+        #직선의 방정식 200, 1100 ~ 0, 0(left), 1640, 1100 ~ 1840,0 (right)
+        #y = 5.5x(left), y = -5.5x + 10120
 
     @staticmethod
     def draw(boy):
