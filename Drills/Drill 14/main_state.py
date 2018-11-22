@@ -42,7 +42,7 @@ def enter():
     game_world.add_object(grass, 0)
 
     global balls
-    balls = [Ball() for i in range(10)]
+    balls = [Ball() for i in range(100)]
     game_world.add_objects(balls, 1)
 
 
