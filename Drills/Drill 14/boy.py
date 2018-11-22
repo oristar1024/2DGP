@@ -133,8 +133,7 @@ class Boy:
         self.y = self.bg.h / 2
 
     def get_bb(self):
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
-
+        return self.x - 50 - self.bg.window_left, self.y - 50 - self.bg.window_bottom, self.x + 50 - self.bg.window_left, self.y + 50 - self.bg.window_bottom
 
     def add_event(self, event):
         self.event_que.insert(0, event)
