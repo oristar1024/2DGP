@@ -8,8 +8,9 @@ import game_framework
 import game_world
 
 import world_build_state
-
+import lanking_state
 name = "MainState"
+game_record = None
 
 
 def collide(a, b):
@@ -57,9 +58,12 @@ def handle_events():
 
 
 def update():
+    global boy, game_record
     for game_object in game_world.all_objects():
         game_object.update()
-
+        if game_object != boy and collide(boy, game_object):
+            game_record = get_time() - boy.start_time
+            game_framework.change_state(lanking_state)
 
 def draw():
     clear_canvas()
